@@ -32,7 +32,7 @@ WORKDIR /var/www/html
 RUN curl -sSL https://github.com/mantisbt/mantisbt/archive/release-${MANTIS_VER}.tar.gz | \
     tar xfz - --strip=1 && \
 	chown -R www-data:www-data /var/www/html && \
-	mkdir /config && \
+	mkdir -p /config && \
 	cp /var/www/html/config/* /config && \
     chown -R www-data:www-data /config && \
 	rm -rf /var/www/html/config && \
