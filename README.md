@@ -24,14 +24,15 @@ docker build -t mantisbt . --build-arg MANTIS_TIMEZONE="America/Argentina/Buenos
 
 Check the documentation at https://www.mantisbt.org/documentation.php in order to get more information.
 
-Alternative you can create a config_inc.php using your database settings and also the smtp configuration:
+Alternatively you can create a config_inc.php file using your database settings and also the smtp configuration:
 
 ```
+<?php
 $g_hostname = 'localhost';
 $g_db_type = 'mysqli';
 $g_database_name = 'bugtracker';
 $g_db_username = 'mantisbt';
-$g_db_password = 'mantisbt';
+$g_db_password = '********';
 $g_default_timezone = 'UTC';
 $g_crypto_master_salt = 'somerandomsaltstring';
 
@@ -45,17 +46,22 @@ $g_smtp_port = 25;
 $g_smtp_connection_mode = 'tls';
 $g_smtp_username = 'mantisbt';
 $g_smtp_password = '********';
+?>
 ```
 
 ### Start the container and run the installer:
 
 ```bash
-docker run --rm -p "8080:80" -v "$(pwd):/config" --network host --name mantisbt mantisbt
+docker run --rm -v "$(pwd):/config" --network host --name mantisbt mantisbt
 ```
 
-Once the container are running, point the browser to http://localhost/admin/install.php
+Once the container is running, point the browser to http://localhost/admin/install.php then
+login using the default credentials.
 
-## Runing a Docker compose stack:
+User: Administrator
+Password: root
+
+## Running a Docker compose stack:
 
 A docker-compose.yml file is include in order to up a running sample stack.
 
