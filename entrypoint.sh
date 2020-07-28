@@ -5,13 +5,13 @@ if [ -f "/config/config_inc.php" ]
 then
 	chown www-data:www-data /config/config_inc.php
 	printf "Found\n"
-	printf "  Checking for instalation folder..."
-	if [ -d "/var/www/html/admin" ]
+	printf "  Checking for instalall script ..."
+	if [ -f "/var/www/html/admin/install.php" ]
 	then
 		printf "Found\n"
 		printf "    Atempting to remove..."
-		rm -rf /var/www/html/admin
-		if [ -d "/var/www/html/admin" ]
+		rm -rf /var/www/html/admin/install.php
+		if [ -f "/var/www/html/admin/install.php" ]
 		then
 			printf "Failed\n"
 		else

@@ -12,7 +12,7 @@ EXPOSE 80
 VOLUME /config
 
 RUN apt-get update -y && \
-    apt-get install --no-install-recommends -y libpng-dev libonig-dev git && \
+    apt-get install --no-install-recommends -y libpng-dev libonig-dev git sendmail && \
 	cd /tmp && \
 	docker-php-ext-install mysqli && \
 	docker-php-ext-install gd && \
@@ -25,7 +25,8 @@ RUN set -xe \
     && ln -sf /usr/share/zoneinfo/${MANTIS_TIMEZONE} /etc/localtime \
     && echo 'date.timezone = "${MANTIS_TIMEZONE}"'                  > /usr/local/etc/php/conf.d/mantis.ini \
     && echo 'upload_max_filesize = "${MANTIS_UPLOAD_MAX_FILESIZE}"' > /usr/local/etc/php/conf.d/mantis.ini \
-    && echo 'post_max_size = "${MANTIS_POST_MAX_FILESIZE}"'         > /usr/local/etc/php/conf.d/mantis.ini
+    && echo 'post_max_size = "${MANTIS_POST_MAX_FILESIZE}"'         > /usr/local/etc/php/conf.d/mantis.ini \
+	&& echo 'sendmail_path = "/usr/sbin/sendmail -t -i"'            > /usr/local/etc/php/conf.d/mantis.ini
 
 WORKDIR /var/www/html
 
